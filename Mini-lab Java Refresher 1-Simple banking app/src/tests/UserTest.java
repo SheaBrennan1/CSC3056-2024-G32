@@ -54,23 +54,6 @@ public class UserTest {
 			System.out.println(TestUtils.TEXT_COLOR_GREEN + "TC5-getMobile_number-Passed" + TestUtils.TEXT_COLOR_RESET);
 		else
 			System.out.println(TestUtils.TEXT_COLOR_RED + "TC5-getMobile_number-FAILED" + TestUtils.TEXT_COLOR_RESET);
-		
-//		if (passed)
-//			System.out.println("All TC's passed");
-//		
-//		if (testUser.getFirst_name() != test_first_name) {
-//			System.out.println("TC3 failed: first_name did not match");
-//		}
-//		
-//		if (testUser.getLast_name() != test_last_name) {
-//			System.out.println("TC4 failed: last_name did not match");
-//		}
-//		
-//		if (testUser.getMobile_number() != test_mobile_number) {
-//			System.out.println("TC5 failed: mobile_number did not match");
-//		}
-		
-
 	}
 
 	

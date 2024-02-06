@@ -18,19 +18,15 @@ public class AccountTest {
         Date accountOpeningDate = new Date();
         Account account = new Account("123456789", "user@example.com", "Savings", accountOpeningDate);
         
-        // Test setAccount_number
         account.setAccount_number("987654321");
         assert account.getAccount_number().equals("987654321");
         
-        // Test setUsername_of_account_holder
         account.setUsername_of_account_holder("newuser@example.com");
         assert account.getUsername_of_account_holder().equals("newuser@example.com");
         
-        // Test setAccount_type
         account.setAccount_type("Standard");
         assert account.getAccount_type().equals("Standard");
         
-        // Test setAccount_opening_rate
         Date newAccountOpeningDate = new Date();
         account.setAccount_opening_rate(newAccountOpeningDate);
         assert account.getAccount_opening_rate().equals(newAccountOpeningDate);

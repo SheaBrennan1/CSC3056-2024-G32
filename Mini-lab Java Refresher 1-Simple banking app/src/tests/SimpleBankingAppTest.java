@@ -68,16 +68,14 @@ public class SimpleBankingAppTest {
 
 	// this test method (test case) verifies if the Withdraw feature works properly
 	public static void testWithdrawals() {
-	    // 1-Setup phase
-	    String accountNumber = "5495-1234"; // Use a valid account number
+	   
+	    String accountNumber = "5495-1234"; 
 	    double balanceBefore = SimpleBankingApp.getBalance(accountNumber); 
-	    double withdrawalAmount = 50.21; // Set a withdrawal amount
+	    double withdrawalAmount = 50.21; 
 	    
-	    // 2-Exercise phase
-	    SimpleBankingApp.addTransaction(accountNumber, -withdrawalAmount); // Notice the negative sign for withdrawal
-	    double balanceAfter = SimpleBankingApp.getBalance(accountNumber);
+	    SimpleBankingApp.addTransaction(accountNumber, -withdrawalAmount);
+	    double balanceAfter = SimpleBankingApp.getBalance(accountNumber);   
 	    
-	    // 3-verify
 	    if (balanceBefore - withdrawalAmount == balanceAfter) {
 	        System.out.println(TestUtils.TEXT_COLOR_GREEN + "testWithdrawals: TC1 passed" + TestUtils.TEXT_COLOR_RESET);
 	    } else {
@@ -86,7 +84,6 @@ public class SimpleBankingAppTest {
 	                balanceBefore, withdrawalAmount, balanceAfter, TestUtils.TEXT_COLOR_RESET);
 	    }
 	    
-	    // 4-tear-down: put the system state back to where it was before the test
 	    SimpleBankingApp.addTransaction(accountNumber, withdrawalAmount);
 	}
 	
@@ -95,7 +92,6 @@ public class SimpleBankingAppTest {
 		testLoadData();
 		testDeposits();
 		testWithdrawals();
-		// testWithdrawals(); -- uncomment this call, when you have developed the test method (test case)
 	}
 
 }
