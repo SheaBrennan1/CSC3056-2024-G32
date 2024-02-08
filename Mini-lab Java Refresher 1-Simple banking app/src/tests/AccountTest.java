@@ -12,6 +12,8 @@ public class AccountTest {
         assert account.getUsername_of_account_holder().equals("user@example.com");
         assert account.getAccount_type().equals("Savings");
         assert account.getAccount_opening_rate().equals(accountOpeningDate);
+
+        System.out.println("testConstructor passed.");
     }
     
     public static void testSetters() {
@@ -30,6 +32,8 @@ public class AccountTest {
         Date newAccountOpeningDate = new Date();
         account.setAccount_opening_rate(newAccountOpeningDate);
         assert account.getAccount_opening_rate().equals(newAccountOpeningDate);
+
+        System.out.println("testSetters passed.");
     }
     
     public static void main(String[] args) {
