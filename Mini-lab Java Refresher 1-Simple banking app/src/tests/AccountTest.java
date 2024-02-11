@@ -1,6 +1,8 @@
 package tests;
 
 import model.Account;
+import utils.TestUtils;
+
 import java.util.Date;
 
 public class AccountTest {
@@ -13,7 +15,7 @@ public class AccountTest {
         assert account.getAccount_type().equals("Savings");
         assert account.getAccount_opening_rate().equals(accountOpeningDate);
 
-        System.out.println("testConstructor passed.");
+        System.out.println(TestUtils.TEXT_COLOR_GREEN + "testConstructor passed." + TestUtils.TEXT_COLOR_RESET);
     }
     
     public static void testSetters() {
@@ -33,13 +35,13 @@ public class AccountTest {
         account.setAccount_opening_rate(newAccountOpeningDate);
         assert account.getAccount_opening_rate().equals(newAccountOpeningDate);
 
-        System.out.println("testSetters passed.");
+        System.out.println(TestUtils.TEXT_COLOR_GREEN +"testSetters passed." + TestUtils.TEXT_COLOR_RESET);
     }
     
     public static void main(String[] args) {
         testConstructor();
         testSetters();
-        System.out.println("All AccountTest tests passed.");
+        System.out.println(TestUtils.TEXT_COLOR_GREEN + "All AccountTest tests passed." + TestUtils.TEXT_COLOR_RESET);
     }
     
 }
