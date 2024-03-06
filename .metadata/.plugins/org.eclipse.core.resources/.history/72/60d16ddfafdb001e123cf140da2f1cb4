@@ -206,20 +206,20 @@ public class RangeTest {
     }
     
     @Test(expected = NullPointerException.class)
-    public void equalsWithBothRangesNullShouldThrowNullPointerException() {
+    public void equalsBothRangesNull() {
         Range range1 = null;
         Range range2 = null;
         assertTrue("Comparing two null ranges should be considered equal", range1.equals(range2));
     }
 
     @Test
-    public void equalsWithItselfShouldReturnTrue() {
+    public void equalsWithItself() {
         Range range1 = new Range(1, 10);
         assertTrue("A range object compared with itself should always be considered equal", range1.equals(range1));
     }
 
     @Test
-    public void equalsWithExtremeValuesShouldReturnTrue() {
+    public void equalsWithExtremeValues() {
         Range range1 = new Range(Double.MIN_VALUE, Double.MAX_VALUE);
         Range range2 = new Range(Double.MIN_VALUE, Double.MAX_VALUE);
         assertTrue("Two range objects with boundaries at extreme values should be considered equal", range1.equals(range2));
@@ -227,37 +227,37 @@ public class RangeTest {
     
     //intersects()
     @Test
-    public void intersectsNoOverlapLowerShouldReturnFalse() {
+    public void intersectsNoOverlapLower() {
         assertFalse("Should return false if no overlap and specified range is lower", intersectsRange.intersects(1, 4));
     }
 
     @Test
-    public void intersectsNoOverlapHigherShouldReturnTrue() {
+    public void intersectsNoOverlapHigher() {
         assertFalse("Should return false if no overlap and specified range is higher", intersectsRange.intersects(16, 20));
     }
 
     @Test
-    public void intersectsWithinShouldReturnTrue() {
+    public void intersectsWithin() {
         assertTrue("Should return true if specified range is within the Range object", intersectsRange.intersects(6, 14));
     }
 
     @Test
-    public void intersectsEncompassingShouldReturnTrue() {
+    public void intersectsEncompassing() {
         assertTrue("Should return true if specified range encompasses the Range object", intersectsRange.intersects(1, 20));
     }
 
     @Test
-    public void intersectsPartiallyOverlapLowerRangeShouldReturnTrue() {
+    public void intersectsPartiallyOverlapLowerRange() {
         assertTrue("Should return true if specified range is partially lower but intersecting", intersectsRange.intersects(3, 10));
     }
 
     @Test
-    public void intersectsPartiallyOverlapHigherRangeShouldReturnTrue() {
+    public void intersectsPartiallyOverlapHigherRange() {
         assertTrue("Should return true if specified range is partially higher but intersecting", intersectsRange.intersects(10, 20));
     }
 
     @Test
-    public void intersectsIdenticalRangeShouldReturnTrue() {
+    public void intersectsIdenticalRange() {
         assertTrue("Should return true if specified range is identical to the Range object", intersectsRange.intersects(5, 15));
     }
     

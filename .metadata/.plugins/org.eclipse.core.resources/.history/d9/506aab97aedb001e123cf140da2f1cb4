@@ -57,169 +57,171 @@ public class RangeTest {
 
     //getLowerBound()
     @Test
-    public void getLowerBoundForPositiveRangeOverlappingWithZeroInclusiveRange() {
+    public void testGetLowerBoundForPositiveRangeOverlappingWithZeroInclusiveRange() {
         assertEquals("The lower bound of range -1 to 1 should be -1", -1, rangeObjectUnderTest.getLowerBound(), 0.0000001d);
     }
 
     @Test
-    public void getLowerBoundForNegativeValueToSpecialValueRange() {
+    public void testGetLowerBoundForNegativeValueToSpecialValueRange() {
         assertEquals("The lower bound of a range from -100 to POSITIVE_INFINITY should be -100", -100, negativeToInfinityRange.getLowerBound(), 0.0000001d);
     }
 
     @Test
-    public void getLowerBoundForZeroLengthRangeWithSpecialValues() {
+    public void testGetLowerBoundForZeroLengthRangeWithSpecialValues() {
         assertEquals("The lower bound of a zero-length range with POSITIVE_INFINITY should be POSITIVE_INFINITY", Double.POSITIVE_INFINITY, zeroLengthRangeWithSpecialValues.getLowerBound(), 0.0000001d);
     }
     
     @Test(expected = NullPointerException.class)
-    public void getLowerBoundThrowsIllegalArgumentExceptionForNullRange() {
+    public void testGetLowerBoundThrowsIllegalArgumentExceptionForNullRange() {
     	nullRange.getLowerBound();
     }
 
     @Test
-    public void getLowerBoundReturnsMinValueForMinValueToMaxValueRange() {
+    public void testGetLowerBoundReturnsMinValueForMinValueToMaxValueRange() {
         assertEquals("The lower bound of a range from Double.MIN_VALUE to Double.MAX_VALUE should be Double.MIN_VALUE", Double.MIN_VALUE, minValueToMaxValueRange.getLowerBound(), 0.0000001d);
     }
 
     @Test
-    public void getLowerBoundJustBelowMaxValueForJustBelowMaxValueRange() {
+    public void testGetLowerBoundJustBelowMaxValueForJustBelowMaxValueRange() {
         assertEquals("The lower bound just below the maximum double value", Double.MAX_VALUE - 1, justBelowMaxValueRange.getLowerBound(), 0.0000001d);
     }
 
     @Test
-    public void getLowerBoundReturnsMaxNegativeValueForMaxNegativeValueRange() {
+    public void testGetLowerBoundReturnsMaxNegativeValueForMaxNegativeValueRange() {
         assertEquals("The lower bound for a range starting at -Double.MAX_VALUE", -Double.MAX_VALUE, maxNegativeValueRange.getLowerBound(), 0.0000001d);
     }
 
     @Test
-    public void getLowerBoundReturnsMaxNegativeValueForFullDoublePrecisionRange() {
+    public void testGetLowerBoundReturnsMaxNegativeValueForFullDoublePrecisionRange() {
         assertEquals("The lower bound for the full double precision range", -Double.MAX_VALUE, fullDoublePrecisionRange.getLowerBound(), 0.0000001d);
     }
 
     //getUpperBound()
     @Test
-    public void getUpperBoundForPositiveRangeOverlappingWithZeroInclusiveRange() {
+    public void testGetUpperBoundForPositiveRangeOverlappingWithZeroInclusiveRange() {
         assertEquals("The upper bound of range -1 to 1 should be 1", 1, rangeObjectUnderTest.getUpperBound(), 0.0000001d);
     }
 
     @Test
-    public void getUpperBoundForNegativeValueToSpecialValueRange() {
+    public void testGetUpperBoundForNegativeValueToSpecialValueRange() {
         assertEquals("The upper bound of a range from -100 to POSITIVE_INFINITY should be POSITIVE_INFINITY", Double.POSITIVE_INFINITY, negativeToInfinityRange.getUpperBound(), 0.0000001d);
     }
 
     @Test
-    public void getUpperBoundForZeroLengthRangeWithSpecialValues() {
+    public void testGetUpperBoundForZeroLengthRangeWithSpecialValues() {
         assertEquals("The upper bound of a zero-length range with POSITIVE_INFINITY should be POSITIVE_INFINITY", Double.POSITIVE_INFINITY, zeroLengthRangeWithSpecialValues.getUpperBound(), 0.0000001d);
     }
 
     @Test
-    public void getUpperBoundReturnsMaxValueForMinValueToMaxValueRange() {
+    public void testGetUpperBoundReturnsMaxValueForMinValueToMaxValueRange() {
         assertEquals("The upper bound of a range from Double.MIN_VALUE to Double.MAX_VALUE should be Double.MAX_VALUE", Double.MAX_VALUE, minValueToMaxValueRange.getUpperBound(), 0.0000001d);
     }
 
     @Test
-    public void getUpperBoundReturnsMaxValueForJustBelowMaxValueRange() {
+    public void testGetUpperBoundReturnsMaxValueForJustBelowMaxValueRange() {
         assertEquals("The upper bound should be Double.MAX_VALUE", Double.MAX_VALUE, justBelowMaxValueRange.getUpperBound(), 0.0000001d);
     }
 
     @Test
-    public void getUpperBoundReturnsNegativeHalfMaxValueForMaxNegativeValueRange() {
+    public void testGetUpperBoundReturnsNegativeHalfMaxValueForMaxNegativeValueRange() {
         assertEquals("The upper bound for a range ending at -Double.MAX_VALUE / 2", -Double.MAX_VALUE / 2, maxNegativeValueRange.getUpperBound(), 0.0000001d);
     }
 
     @Test
-    public void getUpperBoundReturnsMaxValueForFullDoublePrecisionRange() {
+    public void testGetUpperBoundReturnsMaxValueForFullDoublePrecisionRange() {
         assertEquals("The upper bound for the full double precision range should be Double.MAX_VALUE", Double.MAX_VALUE, fullDoublePrecisionRange.getUpperBound(), 0.0000001d);
     }
     
     //constrain()
     @Test
-    public void constrainValueBelowRangeOfLowerBound() {
+    public void testConstrainValueBelowRangeOfLowerBound() {
         assertEquals("Value below range should be constrained to lower bound", -10, constraintRange.constrain(-15), 0.0000001d);
     }
     
     @Test
-    public void constrainReturnSameForValueWithinRange() {
+    public void testConstrainValueWithinRange() {
         assertEquals("Value within range should be unchanged", 5, constraintRange.constrain(5), 0.0000001d);
     }
 
+
     @Test
-    public void constrainReturnUpperBoundForValueAboveRange() {
+    public void testConstrainValueAboveRange() {
         assertEquals("Value above range should be constrained to upper bound", 10, constraintRange.constrain(15), 0.0000001d);
     }
     
     @Test
-    public void constrainReturnUpperBoundForValueAtUpperBound() {
+    public void testConstrainValueAtUpperBound() {
         assertEquals("Value at upper bound should be unchanged", 10, constraintRange.constrain(10), 0.0000001d);
     }
 
+
     @Test
-    public void constrainShouldReturnLowerBoundForValueAtLowerBound() {
+    public void testConstrainValueAtLowerBound() {
         assertEquals("Value at lower bound should be unchanged", -10, constraintRange.constrain(-10), 0.0000001d);
     }
 
     @Test
-    public void constrainShouldReturnLowerBoundForValueJustBelowLowerBound() {
+    public void testConstrainValueJustBelowLowerBound() {
         assertEquals("Value just below lower bound should be constrained to lower bound", -10, constraintRange.constrain(-10.0001), 0.0000001d);
     }
 
     @Test
-    public void constrainShouldReturnUpperBoundForValueJustAboveUpperBound() {
+    public void testConstrainValueJustAboveUpperBound() {
         assertEquals("Value just above upper bound should be constrained to upper bound", 10, constraintRange.constrain(10.0001), 0.0000001d);
     }
     
     @Test
-    public void constrainShouldReturnInputForValueJustInsideLowerBoundary() {
+    public void testConstrainJustInsideLowerBoundary() {
         assertEquals("Value just inside lower boundary should remain unchanged", -9.999, constraintRange.constrain(-9.999), 0.0000001d);
     }
     
     @Test
-    public void constrainShouldReturnLowerBoundWithNegativeInfinitySetAsTheConstrain() {
+    public void testConstrainWithNegativeInfinitySetAsTheConstrain() {
         assertEquals("Double.NEGATIVE_INFINITY should be constrained to lower bound", -10, constraintRange.constrain(Double.NEGATIVE_INFINITY), 0.0000001d);
     }
     
     @Test
-    public void constrainShouldReturnUpperBoundWithPositiveInfinitySetAsTheConstrain() {
+    public void testConstrainPositiveInfinitySetAsTheConstrain() {
         assertEquals("Double.POSITIVE_INFINITY should be constrained to upper bound", 10, constraintRange.constrain(Double.POSITIVE_INFINITY), 0.0000001d);
     }
     
     //equals()
     @Test
-    public void equalsWithSameBoundsShouldReturnTrue() {
+    public void testEqualsWithSameBounds() {
         Range range1 = new Range(1, 10);
         Range range2 = new Range(1, 10);
         assertTrue("Two range objects with the same lower and upper bounds should be considered equal", range1.equals(range2));
     }
 
     @Test
-    public void equalsWithDifferentBoundsShouldReturnFalse() {
+    public void testEqualsWithDifferentBounds() {
         Range range1 = new Range(1, 10);
         Range range2 = new Range(2, 5);
         assertFalse("Two range objects with different lower and/or upper bounds should not be considered equal", range1.equals(range2));
     }
 
     @Test(expected = NullPointerException.class)
-    public void equalsWithNullShouldThrowNullPointerException() {
+    public void testEqualsWithNull() {
         Range range1 = null;
         Range range2 = new Range(1, 10);
         assertFalse("A range object compared with null should not be considered equal", range1.equals(range2));
     }
     
     @Test(expected = NullPointerException.class)
-    public void equalsWithBothRangesNullShouldThrowNullPointerException() {
+    public void testEqualsBothRangesNull() {
         Range range1 = null;
         Range range2 = null;
         assertTrue("Comparing two null ranges should be considered equal", range1.equals(range2));
     }
 
     @Test
-    public void equalsWithItselfShouldReturnTrue() {
+    public void testEqualsWithItself() {
         Range range1 = new Range(1, 10);
         assertTrue("A range object compared with itself should always be considered equal", range1.equals(range1));
     }
 
     @Test
-    public void equalsWithExtremeValuesShouldReturnTrue() {
+    public void testEqualsWithExtremeValues() {
         Range range1 = new Range(Double.MIN_VALUE, Double.MAX_VALUE);
         Range range2 = new Range(Double.MIN_VALUE, Double.MAX_VALUE);
         assertTrue("Two range objects with boundaries at extreme values should be considered equal", range1.equals(range2));
@@ -227,37 +229,37 @@ public class RangeTest {
     
     //intersects()
     @Test
-    public void intersectsNoOverlapLowerShouldReturnFalse() {
+    public void testIntersectsNoOverlapLower() {
         assertFalse("Should return false if no overlap and specified range is lower", intersectsRange.intersects(1, 4));
     }
 
     @Test
-    public void intersectsNoOverlapHigherShouldReturnTrue() {
+    public void testIntersectsNoOverlapHigher() {
         assertFalse("Should return false if no overlap and specified range is higher", intersectsRange.intersects(16, 20));
     }
 
     @Test
-    public void intersectsWithinShouldReturnTrue() {
+    public void testIntersectsWithin() {
         assertTrue("Should return true if specified range is within the Range object", intersectsRange.intersects(6, 14));
     }
 
     @Test
-    public void intersectsEncompassingShouldReturnTrue() {
+    public void testIntersectsEncompassing() {
         assertTrue("Should return true if specified range encompasses the Range object", intersectsRange.intersects(1, 20));
     }
 
     @Test
-    public void intersectsPartiallyOverlapLowerRangeShouldReturnTrue() {
+    public void testIntersectsPartiallyOverlapLowerRange() {
         assertTrue("Should return true if specified range is partially lower but intersecting", intersectsRange.intersects(3, 10));
     }
 
     @Test
-    public void intersectsPartiallyOverlapHigherRangeShouldReturnTrue() {
+    public void testIntersectsPartiallyOverlapHigherRange() {
         assertTrue("Should return true if specified range is partially higher but intersecting", intersectsRange.intersects(10, 20));
     }
 
     @Test
-    public void intersectsIdenticalRangeShouldReturnTrue() {
+    public void testIntersectsIdenticalRange() {
         assertTrue("Should return true if specified range is identical to the Range object", intersectsRange.intersects(5, 15));
     }
     
