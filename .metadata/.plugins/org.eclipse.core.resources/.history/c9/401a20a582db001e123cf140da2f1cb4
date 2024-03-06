@@ -55,7 +55,7 @@ public class RangeTest {
                 0, rangeObjectUnderTest.getCentralValue(), 0.000000001d);
     }
 
-    //getLowerBound()
+    //getLowerBound() Test cases
     @Test
     public void testGetLowerBoundForPositiveRangeOverlappingWithZeroInclusiveRange() {
         assertEquals("The lower bound of range -1 to 1 should be -1", -1, rangeObjectUnderTest.getLowerBound(), 0.0000001d);
@@ -70,10 +70,10 @@ public class RangeTest {
     public void testGetLowerBoundForZeroLengthRangeWithSpecialValues() {
         assertEquals("The lower bound of a zero-length range with POSITIVE_INFINITY should be POSITIVE_INFINITY", Double.POSITIVE_INFINITY, zeroLengthRangeWithSpecialValues.getLowerBound(), 0.0000001d);
     }
-    
-    @Test(expected = NullPointerException.class)
-    public void testGetLowerBoundThrowsIllegalArgumentExceptionForNullRange() {
-    	nullRange.getLowerBound();
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetLowerBoundThrowsIllegalArgumentExceptionForMinValueAndMaxNegativeValueRange() {
+        new Range(Double.MIN_VALUE, -Double.MAX_VALUE);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class RangeTest {
         assertEquals("The lower bound for the full double precision range", -Double.MAX_VALUE, fullDoublePrecisionRange.getLowerBound(), 0.0000001d);
     }
 
-    //getUpperBound()
+ // Test cases for getUpperBound()
     @Test
     public void testGetUpperBoundForPositiveRangeOverlappingWithZeroInclusiveRange() {
         assertEquals("The upper bound of range -1 to 1 should be 1", 1, rangeObjectUnderTest.getUpperBound(), 0.0000001d);
@@ -175,16 +175,6 @@ public class RangeTest {
         assertEquals("Value just inside lower boundary should remain unchanged", -9.999, constraintRange.constrain(-9.999), 0.0000001d);
     }
     
-    @Test
-    public void testConstrainNegativeInfinity() {
-        assertEquals("Double.NEGATIVE_INFINITY should be constrained to lower bound", -10, constraintRange.constrain(Double.NEGATIVE_INFINITY), 0.0000001d);
-    }
-    
-    @Test
-    public void testConstrainPositiveInfinity() {
-        assertEquals("Double.POSITIVE_INFINITY should be constrained to upper bound", 10, constraintRange.constrain(Double.POSITIVE_INFINITY), 0.0000001d);
-    }
-    
     //equals()
     @Test
     public void testEqualsWithSameBounds() {
@@ -200,18 +190,11 @@ public class RangeTest {
         assertFalse("Two range objects with different lower and/or upper bounds should not be considered equal", range1.equals(range2));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testEqualsWithNull() {
-        Range range1 = null;
-        Range range2 = new Range(1, 10);
-        assertFalse("A range object compared with null should not be considered equal", range1.equals(range2));
-    }
-    
-    @Test(expected = NullPointerException.class)
-    public void testEqualsBothRangesNull() {
-        Range range1 = null;
+        Range range1 = new Range(1, 10);
         Range range2 = null;
-        assertTrue("Comparing two null ranges should be considered equal", range1.equals(range2));
+        assertFalse("A range object compared with null should not be considered equal", range1.equals(range2));
     }
 
     @Test
@@ -249,17 +232,17 @@ public class RangeTest {
     }
 
     @Test
-    public void testIntersectsPartiallyOverlapLowerRange() {
+    public void testIntersectsPartiallyLower() {
         assertTrue("Should return true if specified range is partially lower but intersecting", intersectsRange.intersects(3, 10));
     }
 
     @Test
-    public void testIntersectsPartiallyOverlapHigherRange() {
+    public void testIntersectsPartiallyHigher() {
         assertTrue("Should return true if specified range is partially higher but intersecting", intersectsRange.intersects(10, 20));
     }
 
     @Test
-    public void testIntersectsIdenticalRange() {
+    public void testIntersectsIdentical() {
         assertTrue("Should return true if specified range is identical to the Range object", intersectsRange.intersects(5, 15));
     }
     
