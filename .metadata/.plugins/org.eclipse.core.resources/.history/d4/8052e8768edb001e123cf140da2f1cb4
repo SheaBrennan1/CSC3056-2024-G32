@@ -134,7 +134,7 @@ public class RangeTest {
     
     //constrain()
     @Test
-    public void testConstrainValueBelowRangeOfLowerBound() {
+    public void testConstrainValueBelowRange() {
         assertEquals("Value below range should be constrained to lower bound", -10, constraintRange.constrain(-15), 0.0000001d);
     }
     
@@ -176,12 +176,12 @@ public class RangeTest {
     }
     
     @Test
-    public void testConstrainWithNegativeInfinitySetAsTheConstrain() {
+    public void testConstrainNegativeInfinity() {
         assertEquals("Double.NEGATIVE_INFINITY should be constrained to lower bound", -10, constraintRange.constrain(Double.NEGATIVE_INFINITY), 0.0000001d);
     }
     
     @Test
-    public void testConstrainPositiveInfinitySetAsTheConstrain() {
+    public void testConstrainPositiveInfinity() {
         assertEquals("Double.POSITIVE_INFINITY should be constrained to upper bound", 10, constraintRange.constrain(Double.POSITIVE_INFINITY), 0.0000001d);
     }
     
