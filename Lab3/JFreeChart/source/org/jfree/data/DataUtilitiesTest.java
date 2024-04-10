@@ -13,6 +13,7 @@ import org.junit.Test;
 public class DataUtilitiesTest {
 
 	private Values2D values2D;
+	private Values2D values2DNull;
 	private Values2D emptyValues2D;
 	private double[] doubleArray;
 	private double[][] doubleArray2D;
@@ -28,6 +29,10 @@ public class DataUtilitiesTest {
 		((DefaultKeyedValues2D) values2D).addValue(10, 1, 1);
 		((DefaultKeyedValues2D) values2D).addValue(5, 0, 2);
 		((DefaultKeyedValues2D) values2D).addValue(-3, 1, 2);
+		
+		values2DNull = new DefaultKeyedValues2D();
+		((DefaultKeyedValues2D) values2D).addValue(null, 0, 0);
+		((DefaultKeyedValues2D) values2D).addValue(2.5, 1, 0);
 
 		emptyValues2D = new DefaultKeyedValues2D();
 		doubleArray = new double[] { -1.0, 0.0, 3.0, 5.5 };
@@ -139,6 +144,18 @@ public class DataUtilitiesTest {
 	    double actualColumnTotal = DataUtilities.calculateColumnTotal(emptyValues2D, -1);
 	    assertEquals("Column total should return 0.0 with invalid input", 0.0, actualColumnTotal, 0.0000001d);
 	}
+	
+	@Test
+	public void calculateColumnTotalWithNullValueInData() {
+	    
+	    try {
+			DataUtilities.calculateColumnTotal(values2DNull,0);
+			fail("No exception thrown. The expected outcome was: a thrown exception of type: IllegalArgumentException");
+		} catch (Exception e) {
+			assertTrue("Incorrect exception type thrown", e.getClass().equals(IllegalArgumentException.class));
+		}
+	}
+	
 
 	// Tests for calculateRowTotal
 	@Test
@@ -296,6 +313,16 @@ public class DataUtilitiesTest {
 	}
 	
 	@Test
+	public void createNumberArray2DWithNullData() {
+	    try {
+	        DataUtilities.createNumberArray2D(null);
+	        fail("No exception thrown. The expected outcome was: a thrown exception of type: IllegalArgumentException");
+	    } catch (Exception e) {
+	        assertTrue("Incorrect exception type thrown", e.getClass().equals(IllegalArgumentException.class));
+	    }
+	}
+	
+	@Test
 	public void createNumberArray2DWithOneNullData() {
 		try { 
 			DataUtilities.createNumberArray2D(new double[][] {{ -1.0, 0.0, 3.0, 5.5}, null});
@@ -384,6 +411,21 @@ public class DataUtilitiesTest {
 	    KeyedValues result = DataUtilities.getCumulativePercentages(emptyKeyedValues);
 	    assertNotNull("Result should not be null", result);
 	    assertEquals("Result should be empty if input is empty", 0, result.getItemCount());
+	}
+	
+	@Test
+	public void getCumulativePercentagesWithNullEntries() {
+		DefaultKeyedValues nullKeyedValues = new DefaultKeyedValues();
+		nullKeyedValues.addValue((Integer) 0,null);
+		nullKeyedValues.addValue((Integer) 1, 5);
+		nullKeyedValues.addValue((Integer) 2, null);
+		
+		try {
+			DataUtilities.getCumulativePercentages((KeyedValues) nullKeyedValues);
+			fail("No exception thrown. The expected outcome was: a thrown exception of type: IllegalArgumentException");
+		} catch (Exception e) {
+			assertTrue("Incorrect exception type thrown", e.getClass().equals(IllegalArgumentException.class));
+		}
 	}
 
 }
