@@ -285,6 +285,21 @@ public class RangeTest {
     }
     
     @Test
+    public void testCombine_BothRangesNonNullAndSameValues() {
+        Range range1 = new Range(1.0, 1.0);
+        Range range2 = new Range(1.0, 1.0);
+
+        Range expected = new Range(1.0, 1.0);
+
+        Range result = Range.combine(range1, range2);
+
+        assertNotNull("Resulting range should not be null", result);
+        assertEquals("Lower bound of the combined range is incorrect", expected.getLowerBound(), result.getLowerBound(), 0.0000001);
+        assertEquals("Upper bound of the combined range is incorrect", expected.getUpperBound(), result.getUpperBound(), 0.0000001);
+    }
+    
+    
+    @Test
     public void testCombine_WithFirstRangeNull() {
         Range range2 = new Range(1.0, 5.0);
 
